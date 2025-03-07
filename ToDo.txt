@@ -1,0 +1,17 @@
+!!!!!!!!!!!!!!!!!!!!!!!
+A broad to do file
+looking at project-wide
+sections
+!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+To research:
+
+Pros/cons & commonly used places of different alignment types
+About the different formats & what each looks like & does
+Chromatogram - what to look for etc.
+
+Features to add:
+
+Front end pop-ups to teach people about the phylogeny itself

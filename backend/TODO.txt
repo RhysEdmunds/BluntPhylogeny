@@ -1,0 +1,8 @@
+!!!!!!!!!!!!!!!!!!!!!!!
+TODO file for the
+backend of the code
+!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+FIRST THING TO DO IS TO SET UP AN ENVIORNMENT TO TEST THE BLASTED THING SO IT CAN BE TESTED AS I GO

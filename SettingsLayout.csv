@@ -1,0 +1,10 @@
+entrez_email,email for accessing NCBI database
+alignment_protocol,alignment protocol
+gene_editing_path,path for the gene editing software
+cleaning_data_protocol,protocol to clean spaces from data"," e.g. Gblocks,additional settings for Gblocks TODO
+bayesian_inference_path,path for bayesian inference software"," assume MRBAYES
+bi_settings_path,path to the settings file for bayesian inference
+tree_format,format of the output tree
+bootstrap,whether to bootstrap the trees"," Y/N,additional settings for bootstrap TODO
+display_tool_path,path to the display tool"," or an R file to create/run - autogenerate?
+webpage_timeout,how long to wait before displaying an error about the webpage being too slow
