@@ -28,10 +28,6 @@ from Help import bioedit_help
 #Settings.set_defaults()
 Settings.get_settings()
 
-rough_trees_path = Settings['OUTPUT'] + "/5rough_trees"
-
-if Settings['practical']:
-    rough_trees_path = Settings['PRACTICAL_OUTPUT']
 
 """
 Sets the environment to run the pasta docker
@@ -45,6 +41,7 @@ Checks whether smirarab/pasta is inlcuded as an image
 Checks whether Docker has its databases linked
     - if not, links it
 """
+
 def set_pasta_env():
     pasta_sh_lines = []
     
@@ -52,8 +49,14 @@ def set_pasta_env():
     from shutil import which
     client_exists = (False if which("Docker") is None else True)
 
-    if not client_exists and Settings['can_install'] > 0:
-        # TODO: can_install = ask_everytime # TODO: ENUM
+    if not client_exists and Settings['can_install'] > Settings.install.NO:
+        # If settings asks everytime, check via interface whether they can install
+        if Settings['can_install'] == Settings.install.ASK_EVERYTIME:
+            #TODO
+            can_install = ask("Install docker (y/n)? ")
+            if can_install == 'n':
+                log("Error: Cannot install Docker due to Settings")
+                return False
         
         log("\tInstalling docker")
         
@@ -82,6 +85,21 @@ def set_pasta_env():
 
     return True
 
+""" UNIT TEST -- Perhaps this piece of code should be in set-up
+TODO - Setting enumerations (0==NO_INSTALL etc.) 
+--- 1 ---
+env: Settings['can install']==0;docker abscent
+result: return False
+--- 2 ---
+env: Settings['can install']==1;docker abscent
+result: install docker;install smirarab;return True
+--- 3 ---
+env: Settings['can install']==0;docker present; smirarab abscent
+result: install smirarab; return True
+--- 4 ---
+env: Settings['can install']==1;docker present;smirarab present
+result: return True
+"""
 
 
 # --- Creating the folders if they don't exist already ---
@@ -97,11 +115,29 @@ def create_folder_if_not_exists(folder_path):
             # Create the folder if it doesn't exist
             makedirs(folder_path)
             log(f"Folder '{folder_path}' created successfully.")
+            return True
         except OSError as e:
             log(f"Error creating folder '{folder_path}': {e}")
+            return False
 
     else:
         log(f"Folder '{folder_path}' exists.")
+        return True
+
+""" UNIT TESTS
+--- 1 ---
+Env: No folders in folder_path
+In: non-existent variable
+Result: Doesn't create a folder, returns False
+--- 2 ---
+Env: No folder in folder_path
+In: "..\\unit_tests\\test_folder"
+Result: Creates a folder, returns True
+--- 3 ---
+Env: Folder in folder_path
+In: "..\\unit_tests\\test_folder"
+Result: returns True
+"""
 
 for folder in Settings.folders:
     create_folder_if_not_exists(Settings[folder])
@@ -119,7 +155,7 @@ match Settings['start']:
         #Utils.move_file(Settings.input_other_filename,Settings.STEP1)
         log("Need to make it to do")
     case _:
-        log("Problem with Settings - no start value")
+        log("!!!!!!!!!!!\nProblem with Settings - no start value\n!!!!!!!!!!!")
         exit()
 
 
@@ -140,17 +176,27 @@ Commands - take in a filepath & return a list for subprocesses to develop
 """
 
 
+# A program that aligns a fasta from docker, requires creating a .sh file which is then ran via Popen
 def pasta_command(fasta):
     # From Settings, a program creating the correct pasta.sh
     set_pasta_env()
+
+    # pasta.sh has to be created each time to include the correct fasta
+    # CREATING pasta.sh
+    #TODO Create correct pasta.sh, with the correct fasta included in the commands
+
+    # RETURNING THE COMMAND TO RUN pasta.sh
     return [Settings['PASTA'] + "/pasta.sh"]
 
+# A program that removes spaces
 def bioedit_command(fasta):
     return [Settings['BIOEDIT'] + "/BioEdit.exe",fasta]
 
+# A program that views the .fastas for manual edit
 def gblocks_command(fasta):
     return [Settings['GBLOCKS'] + "/Gblocks.exe",fasta]
 
+# A program that views the trees
 def figview_command(tre):
     return [Settings['FIGVIEW'] + "/FigTree v1.4.4.exe",tre]
 
@@ -198,14 +244,15 @@ if Settings['start'] < 2 and 2 <= Settings['end']:
 
         aln_filename = "pastajob.marker001."+fasta[:-6]+".aln"
         aln_filename_new = Settings['STEP2'] + "/" + fasta
-        Utils.rename_file([aln_filename],[aln_filename_new])
+        Utils.rename_files([aln_filename],[aln_filename_new])
         
         # Moving & renaming NJ trees to the output
+        rough_trees_path = Settings['OUTPUT'] + "/5rough_trees"
         log("Moving & renaming rough trees to " + rough_trees_path)
 
         tre_filename = "pastajob.tre"
         tre_filename_new = rough_trees_path + fasta[:-6]+".tre"
-        Utils.rename_file(tre_filename,tre_filename_new)
+        Utils.rename_files(tre_filename,tre_filename_new)
         
         # Opening trees for inspection
         if Settings['inspect_trees']:
@@ -299,6 +346,7 @@ if Settings['start'] < 5 and 5 <= Settings['end']:
         tre_filename = rough_tree(fasta_filename)
 
         # Checking concatenated tree looks alright
+        rough_trees_path = Settings['OUTPUT'] + "/5rough_trees"
         log("Moving & renaming rough tree to " + rough_trees_path)
 
         tre_filename_new = rough_trees_path + tre_filename

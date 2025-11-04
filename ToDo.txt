@@ -7,11 +7,19 @@ sections
 
 
 To research:
-
-Pros/cons & commonly used places of different alignment types
+ - Pros/cons & commonly used places of different alignment types
 About the different formats & what each looks like & does
 Chromatogram - what to look for etc.
+ - Front end design according to UX principles
 
-Features to add:
 
-Front end pop-ups to teach people about the phylogeny itself
+To put into place essential:
+ - Install & uninstall the program parts of it
+https://nsis.sourceforge.io/Main_Page
+https://stackoverflow.com/questions/1074013/how-to-create-a-robust-minimal-installer-for-windows
+Try these out
+
+To put into place extensions:
+ - Ability to use Windows Azure for processing power
+Requires a breakdown of the price, & requires dealing with money - maybe charge 1pence commission on every pound?
+Requires additional work to set up

@@ -9,6 +9,19 @@ SETTINGS = "C:/Users/rhyse/OneDrive/Documents/Personal/Biology/Phylogenetics/"
 Settings = {'ROOT_PATH':"."}
 
 """
+Installation consent in Settings file
+Level of installation - #0 - no further installation allows, terminates
+                        #1 - ask everytime
+                        #2 - can install willy-nilly
+"""
+class install(enumerate):
+    NO = 0
+    ASK_EVERYTIME = 1
+    YES = 2
+
+
+
+"""
 Sets the variables to default values.
 They can be seen below, which also gives a list of all the standard variables in settings (defined in other documentation)
 """
@@ -43,7 +56,7 @@ def set_defaults():
     # Level of installation - #0 - no further installation allows, terminates
                               #1 - ask everytime
                               #2 - can install willy-nilly
-    Settings['can_install'] = 2
+    Settings['can_install'] = install.ASK_EVERYTIME
     
     # ----- Paths -----
     ### INPUTS & OUTPUTS

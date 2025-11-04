@@ -1,9 +1,17 @@
-
-""" LOGS A GIVEN STRING
-TODO: Should pass the input to eel to display in one of the tabs, this should be in the front-end of thing?
 """
+Log.py CLI
+Developer: Rhys Edmunds
+Created: 
+
+This logging file is designed to interact with a command line interface
+It should be a viable version in and of itself
+Another Log.py will be created to interact via eel with a html GUI, where there is also a logging section to the program
+"""
+
+
+""" LOGS A GIVEN STRING """
 def log(inp):
-    print(inp)
+    print(inp) # For a CLI, this is just printing it
 
 
 """ Forms a checkpoint

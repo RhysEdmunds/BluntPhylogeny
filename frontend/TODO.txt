@@ -1,0 +1,13 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!
+TODO for frontend, at the
+minute, it is everything.
+!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Plan of approach:
+Initially, do some UX research into how people will use the program & how it can best be used by them - aim at researchers & contact people at the Natural History Museum London & Liz Harper's group.
+
+Make HTMLs for the pages, and then use a python script to enable this to work as an application on a local computer.
+
+Requires: customer analysis, wire framing, design, and then actually writing it.
+
+Need to then provide a support structure for people to report bugs - since this is small scale, a simple email should work.

@@ -87,6 +87,7 @@ if there's already the file with the same name there, backs it up & replaces it
 /return True or False depending on success
 """
 def move_files(input_filenames,new_directory):
+    #TODO
     Log.log("Moving file " + input_filenames + " TODO")
     return False
 
@@ -102,6 +103,7 @@ if there's already the file with the same name there, backs it up & replaces it
 /return True or False depending on success
 """
 def rename_files(input_filenames,new_filenames):
+    #TODO
     Log.log("Renaming files " + input_filenames + " TODO")
     return False
 
@@ -115,6 +117,7 @@ Deletes files, either by moving them to a .zip file, or by pernamently deleting 
 /return True or False depending on success
 """
 def delete_files(input_filenames,pernament=False):
+    #TODO
     Log.log("Deleting files " + input_filenames + " TODO")
     return False
 
