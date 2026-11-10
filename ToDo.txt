@@ -18,6 +18,8 @@ To put into place essential:
 https://nsis.sourceforge.io/Main_Page
 https://stackoverflow.com/questions/1074013/how-to-create-a-robust-minimal-installer-for-windows
 Try these out
+ - A frontend
+ - Finishing the backend
 
 To put into place extensions:
  - Ability to use Windows Azure for processing power
